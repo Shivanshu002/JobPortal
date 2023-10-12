@@ -17,17 +17,18 @@ function LandingPage() {
 
 
     useEffect(() => {
-        seeJob("software developer")
+        seeJob("Java developer")
 
     }, [])
 
     const seeJob = async () => {
         try {
-            const response = await fetch(URL);
+            const response = await fetch(`${URL}`);
             const data = await response.json();
+
             console.log(data);
             setJob(data.data);
-            // setJob(data.search)
+
         } catch (error) {
             console.error(error);
         }
@@ -35,20 +36,13 @@ function LandingPage() {
 
 
     // for handle search input 
-    const handleSeachInput = (e) => {
+    const handleSeachInput = (event) => {
 
-        if (e.target.key === "Enter") {
-            // seeJob(searchJob)
+        if (event.key === "Enter") {
+            seeJob(searchJob);
         }
     };
 
-
-
-    // for handle click button
-    const handleclick = (e) => {
-
-        seeJob(searchJob)
-    }
 
     return (
         <>
@@ -61,7 +55,7 @@ function LandingPage() {
                         <h1 className='text-slate-600 text-xl text-center'>what programming language you are looking for a job in.</h1>
                         <label className='text-5xl font-bold text-slate-800'>Search Job&#128269;</label>
                         <input value={searchJob} onChange={(e) => setSearchJob(e.target.value)} onKeyDown={handleSeachInput} type='search' className='md:w-[400px] p-4 bg-blue-200 rounded' placeholder='Search perfect job' />
-                        <button onClick={handleclick} className='bg-blue-700 p-2 md:text-xl font-bold text-white rounded'>Search</button>
+                        <button onSubmit={(e) => { e.preventDefault(); }} className='bg-blue-700 p-2 md:text-xl font-bold text-white rounded'>Search</button>
                     </div>
                 </div>
                 <h1 className='text-5xl font-bold text-slate-700 flex justify-center'>Recommended Jobs....</h1>
@@ -79,6 +73,7 @@ function LandingPage() {
                     job && job.length > 0 ? (
                         job.map((curr) => {
 
+                            // sending data form this file to  ApplyForm
                             const ti = curr.title;
                             const Com = curr.company_name;
                             const Lo = curr.location;

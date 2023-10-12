@@ -5,16 +5,18 @@ import LandingPage from './LandingPage';
 import Login from './Login';
 import ApplyForm from './ApplyForm';
 import Sucess from './Sucess';
+import Navbar from './Navbar';
 function App() {
   return (
 
     <>
+      <Navbar />
       <Routes>
         <Route path='/' element={<SignUp />} />
         <Route path='/home' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/applyform' element={<ApplyForm />} />
-        <Route path='/success' element={<Sucess />} />
+        <Route path='/succesfull' element={<Sucess />} />
       </Routes>
     </>
 
